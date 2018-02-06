@@ -66,6 +66,14 @@ class NewSkill(MycroftSkill):
  	who_intent = IntentBuilder("WhoIntent").\
             require("WhoKeyword").build()
         self.register_intent(who_intent, self.handle_who_intent)
+	
+	who_am_i_intent = IntentBuilder("WhoAmIIntent").\
+            require("WhoAmIKeyword").build()
+        self.register_intent(who_am_i_intent, self.handle_who_am_i_intent)
+
+	composition_intent = IntentBuilder("CompositionIntent").\
+            require("CompositionKeyword").build()
+        self.register_intent(composition_intent, self.handle_composition_intent)
 
     # The "handle_xxxx_intent" functions define Mycroft's behavior when
     # each of the skill's intents is triggered: in this case, he simply
@@ -84,6 +92,12 @@ class NewSkill(MycroftSkill):
 	
     def handle_who_intent(self, message):
         self.speak_dialog("who")
+    
+    def handle_who_am_i(self, message):
+        self.speak_dialog("who.am.i")
+    
+    def handle_composition(self, message):
+        self.speak_dialog("composition")
 
     # The "stop" method defines what Mycroft does when told to stop during
     # the skill's execution. In this case, since the skill's functionality

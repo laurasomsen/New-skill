@@ -1,0 +1,7 @@
+{
+  "utterance": "what is IDmind",
+  "intent_type": "WhatIsIntent",
+  "intent": {
+    "WhatIsKeyword": "what is IDmind"
+  }
+}

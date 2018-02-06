@@ -1,0 +1,7 @@
+{
+  "utterance": "are you happy",
+  "intent_type": "AreYouIntent",
+  "intent": {
+    "AreYouKeyword": "are you happy"
+  }
+}

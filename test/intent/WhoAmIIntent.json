@@ -1,0 +1,7 @@
+{
+  "utterance": "who am i",
+  "intent_type": "WhoAmIIntent",
+  "intent": {
+    "WhoAmIKeyword": "who am i"
+  }
+}

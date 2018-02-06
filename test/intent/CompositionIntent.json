@@ -1,0 +1,7 @@
+{
+  "utterance": "Who belongs to the team",
+  "intent_type": "CompositionIntent",
+  "intent": {
+    "CompositionKeyword": "Who belongs to the team"
+  }
+}
