@@ -81,6 +81,7 @@ class NewSkill(MycroftSkill):
     # the method is called.
     def handle_are_you_intent(self, message):
         self.speak_dialog("are.you")
+	
 
     def handle_hello_intent(self, message):
         self.speak_dialog("hello")
@@ -93,6 +94,7 @@ class NewSkill(MycroftSkill):
     
     def handle_who_am_i_intent(self, message):
         self.speak_dialog("who.am.i")
+	LOGGER.debug("experiencia")
     
     def handle_composition_intent(self, message):
         self.speak_dialog("composition")
