@@ -55,13 +55,11 @@ class NewSkill(MycroftSkill):
 
         hello_intent = IntentBuilder("HelloIntent").\
             require("HelloKeyword").build()
-        self.register_intent(hello_intent,
-                             self.handle_hello_intent)
+        self.register_intent(hello_intent, self.handle_hello_intent)
 
         what_is_intent = IntentBuilder("WhatIsIntent").\
             require("WhatIsKeyword").build()
-        self.register_intent(what_is_intent,
-                             self.handle_what_is_intent)
+        self.register_intent(what_is_intent, self.handle_what_is_intent)
 
  	who_intent = IntentBuilder("WhoIntent").\
             require("WhoKeyword").build()
@@ -93,10 +91,10 @@ class NewSkill(MycroftSkill):
     def handle_who_intent(self, message):
         self.speak_dialog("who")
     
-    def handle_who_am_i(self, message):
+    def handle_who_am_i_intent(self, message):
         self.speak_dialog("who.am.i")
     
-    def handle_composition(self, message):
+    def handle_composition_intent(self, message):
         self.speak_dialog("composition")
 
     # The "stop" method defines what Mycroft does when told to stop during
