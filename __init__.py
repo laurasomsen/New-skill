@@ -49,7 +49,7 @@ class LEDSkill(MycroftSkill):
     # creates and registers each intent that the skill uses
     def initialize(self):
         self.load_data_files(dirname(__file__))
-	
+	platform = self.config_core.get("enclosure" ,{}).get("platform")
 	if platform == 'picroft':
 	
 		import RPi.GPIO as GPIO
