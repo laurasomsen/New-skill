@@ -38,28 +38,49 @@ LOGGER = getLogger(__name__)
 # The logic of each skill is contained within its own class, which inherits
 # base methods from the MycroftSkill class with the syntax you can see below:
 # "class ____Skill(MycroftSkill)"
-class LEDSkill(MycroftSkill):
+class NewSkill(MycroftSkill):
 
     # The constructor of the skill, which calls MycroftSkill's constructor
     def __init__(self):
-        super(LEDSkill, self).__init__(name="LEDSkill")	
-
+        super(NewSkill, self).__init__(name="NewSkill")
 
     # This method loads the files needed for the skill's functioning, and
     # creates and registers each intent that the skill uses
     def initialize(self):
         self.load_data_files(dirname(__file__))
-	platform = self.config_core.get("enclosure" ,{}).get("platform")
-	if platform == 'picroft':
 	
-		import RPi.GPIO as GPIO
-		import time
-		GPIO.setmode(GPIO.BCM)
-		GPIO.setwarnings(False)
-		GPIO.setup(18,GPIO.OUT)
-		self.add_event("recognizer_loop:record_begin", self.handle_flash_led_on)
-		self.add_event("recognizer_loop:record_end", self.handle_flash_led_off)
 	
+	import RPi.GPIO as GPIO
+	import time
+	GPIO.setmode(GPIO.BCM)
+	GPIO.setwarnings(False)
+	GPIO.setup(18,GPIO.OUT)
+	self.add_event("recognizer_loop:record_begin", self.handle_flash_led_on)
+	self.add_event("recognizer_loop:record_end", self.handle_flash_led_off)
+	
+        are_you_intent = IntentBuilder("AreYouIntent").\
+            require("AreYouKeyword").build()
+        self.register_intent(are_you_intent, self.handle_are_you_intent)
+
+        hello_intent = IntentBuilder("HelloIntent").\
+            require("HelloKeyword").build()
+        self.register_intent(hello_intent, self.handle_hello_intent)
+
+        what_is_intent = IntentBuilder("WhatIsIntent").\
+            require("WhatIsKeyword").build()
+        self.register_intent(what_is_intent, self.handle_what_is_intent)
+
+ 	who_intent = IntentBuilder("WhoIntent").\
+            require("WhoKeyword").build()
+        self.register_intent(who_intent, self.handle_who_intent)
+	
+	who_am_i_intent = IntentBuilder("WhoAmIIntent").\
+            require("WhoAmIKeyword").build()
+        self.register_intent(who_am_i_intent, self.handle_who_am_i_intent)
+
+	composition_intent = IntentBuilder("CompositionIntent").\
+            require("CompositionKeyword").build()
+        self.register_intent(composition_intent, self.handle_composition_intent)
 
     # The "handle_xxxx_intent" functions define Mycroft's behavior when
     # each of the skill's intents is triggered: in this case, he simply
@@ -74,15 +95,33 @@ class LEDSkill(MycroftSkill):
     def handle_flash_led_off(self, message):
 	GPIO.output(18,GPIO.LOW)
 
+    def handle_are_you_intent(self, message):
+        self.speak_dialog("are.you")
+	
+
+    def handle_hello_intent(self, message):
+        self.speak_dialog("hello")
+
+    def handle_what_is_intent(self, message):
+        self.speak_dialog("what.is")
+	
+    def handle_who_intent(self, message):
+        self.speak_dialog("who")
+    
+    def handle_who_am_i_intent(self, message):
+        self.speak_dialog("who.am.i")
+    
+    def handle_composition_intent(self, message):
+        self.speak_dialog("composition")
+
     # The "stop" method defines what Mycroft does when told to stop during
     # the skill's execution. In this case, since the skill's functionality
     # is extremely simple, the method just contains the keyword "pass", which
     # does nothing.
     def stop(self):
-	
         pass
 
 # The "create_skill()" method is used to create an instance of the skill.
 # Note that it's outside the class itself.
 def create_skill():
-    return LEDSkill()
+    return NewSkill()
